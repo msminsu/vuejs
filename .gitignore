@@ -1,0 +1,9 @@
+.history/
+.idea/
+.vscode/
+node_modules/
+*.map
+.DS_store
+.sass-cache
+package-lock.json
+dist/

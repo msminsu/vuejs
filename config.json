@@ -1,0 +1,15 @@
+{
+	"game": "bns",
+	"author": "NCSOFT",
+	"drive": {
+		"window": "Z:",
+		"mac": "/Volumes/wwwroot"
+	},
+	"sass_output": "compact",
+	"es6":true,
+
+	"name": "bns 170913_taecheon",
+	"year": "2017",
+	"category": "history",
+	"folder": "./"
+}

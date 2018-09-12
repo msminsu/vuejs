@@ -6,13 +6,13 @@ var sourcemaps = require('gulp-sourcemaps'),
     config = require('./config.json');
 
 
-var category = config.category;
+
 var sass_output = config.sass_output;
 var folder = config.folder;
 
 var paths = {
-    local_sass: folder+'/_src/sass/**/*.scss',
-    local_css: folder+'/css'
+    local_sass: folder+'*.scss',
+    local_css: folder+'css'
 };
 
 gulp.task('start',function(){
