@@ -8,9 +8,9 @@
     import axios from "axios";
     import _ from "lodash";
     
-    const API_KEY = "";
+    const API_KEY = "AIzaSyB90nzT-0F7xbOR0NpIU1N5HVhDJy0zEic";
     const max = 50;
-    const defaultKeyword = "";
+    const defaultKeyword = "라푼젤 귀뚫기";
     
     export default {
         name: "SearchInput",
