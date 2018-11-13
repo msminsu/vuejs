@@ -10,7 +10,7 @@
     
     const API_KEY = "AIzaSyB90nzT-0F7xbOR0NpIU1N5HVhDJy0zEic";
     const max = 50;
-    const defaultKeyword = "라푼젤 귀뚫기";
+    const defaultKeyword = "javascript";
     
     export default {
         name: "SearchInput",
