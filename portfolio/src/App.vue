@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <ul>
+    <!-- <ul v-if="mode === 'list'">
       <li>
-                <a href="#;">
+                <a href="#;" v-on:click="open()">
                     <span class="wrap">
                       <em class="entry_date"> July 1988</em>
                       <strong>Graduation 1988</strong>
@@ -66,24 +66,110 @@
                     </span>
                 </a>
             </li>
-    </ul>
+    </ul> -->
+    <ListComponent v-on:modeChange='onModeChange' v-if="mode ==='list'" :mode="mode" :lists = 'lists'></ListComponent>
+    <Detail v-on:modeChange='onModeChange' v-else :mode="mode" :listData = 'listData'></Detail>
   </div>
-
-
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import ListComponent from './components/listComponent'
+import Detail from './components/detail'
 
 export default {
   name: 'App',
+  data: function(){
+    return {
+      mode: 'list',
+      listData:null,
+      lists:[
+         {
+          id: 1,
+          content: '메모 #1',
+          href: 'https://naver.com',
+          src: 'https://source.unsplash.com/collection/190720/900x400'
+        },
+         {
+          id: 2,
+          content: '메모 #1',
+          href: 'https://naver.com',
+          src: 'https://source.unsplash.com/collection/190721/900x400'
+        },
+         {
+          id: 3,
+          content: '메모 #1',
+          href: 'https://naver.com',
+          src: 'https://source.unsplash.com/collection/190722/900x400'
+        },
+         {
+          id: 4,
+          content: '메모 #1',
+          href: 'https://naver.com',
+          src: 'https://source.unsplash.com/collection/190723/900x400'
+        },
+         {
+          id: 5,
+          content: '메모 #1',
+          href: 'https://naver.com',
+          src: 'https://source.unsplash.com/collection/190724/900x400'
+        },
+         {
+          id: 6,
+          content: '메모 #1',
+          href: 'https://naver.com',
+          src: 'https://source.unsplash.com/collection/190725/900x400'
+        },
+         {
+          id: 7,
+          content: '메모 #1',
+          href: 'https://naver.com',
+          src: 'https://source.unsplash.com/collection/190726/900x400'
+        },
+         {
+          id: 8,
+          content: '메모 #1',
+          href: 'https://naver.com',
+          src: 'https://source.unsplash.com/collection/190727/900x400'
+        },
+         {
+          id: 9,
+          content: '메모 #1',
+          href: 'https://naver.com',
+          src: 'https://source.unsplash.com/collection/190728/900x400'
+        },
+         {
+          id: 10,
+          content: '메모 #1',
+          href: 'https://naver.com',
+          src: 'https://source.unsplash.com/collection/190729/900x400'
+        },
+
+      ]
+    }
+  },
+
+  watch:{
+    mode: function(){
+      // console.log(this.$el);
+    }
+
+  },
   components: {
-    HelloWorld
+    Detail,
+    ListComponent
+  },
+  methods: {
+
+    onModeChange: function(data,list){
+      this.mode = data
+      this.listData = list
+    }
   }
+
 }
 </script>
 
-<style scope lang="scss">
+<style lang="scss" >
 #app{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -92,53 +178,5 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-body{background: #f4f4f4;
-font: 42px/1.4 "ff-dagny-web-pro", "Times New Roman", Times, serif;
-}
-
-a{
-  display: block;
-  text-decoration: none;
-  color: #8d8d8d;
-  padding: 20px 0;
-  }
-a:hover{background: #fff;
-strong{color: #000;font-weight: normal;}
-}
-strong{
-  display: block;
-  padding-left: 167px;width: 630px;
-      padding-bottom: 26px;
-  text-align: left;
-  font-weight: normal;
-}
-li{
-  position: relative;
-  border-bottom: 1px solid #ddd;
-  .wrap{
-    display: block;
-    position: relative;
-    width: 960px;
-    margin:0 auto;
-  }
-  .con{
-    padding-left: 170px;
-    width: 480px;
-display: block;
-text-align-last: left;
-    font-size: 14px;
-    color: #282828;
-
-  }
-  em{
-    font-style: normal;
-    position: absolute;
-    top: 11px;
-    left: 0;
-    font-size: 14px;
-  }
-
-}
-
 
 </style>
