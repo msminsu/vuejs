@@ -6,7 +6,7 @@
       <button :class="['btn-next', isNext && 'active']" @click="next">next</button>
       <h3 ref="aaa">{{listData.title}}</h3>
       <!-- <img :src="require(`listData.src`)" alt=""> -->
-      <img :src="require('@/assets/' + listData.src + '.jpg')" alt="">
+      <img :src="require('@/assets/' + listData.src + '.png')" alt="">
       <div class="wrap">
         <dl>
         <dt>RELEASE DATE</dt>
@@ -144,7 +144,7 @@ this.isNext = true;
   transition: all .7s cubic-bezier(0.165, 0.840, 0.440, 1.000);
 }
 
-img{width: 600px;box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5); }
+// img{width: 600px;box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5); }
 .btn-close{
   border:none;
   outline:none;

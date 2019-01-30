@@ -11,6 +11,8 @@
         </a>
       </li>
     </ul>
+    <i class="ruler"></i>
+    <i class="tape"></i>
   </div>
 </template>
 
@@ -36,7 +38,14 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped >
-
+i{
+  position: absolute;
+  display: block;
+  &.ruler{top: 0;left: 50%; margin-left: -396px; width: 54px; height: 100vh;background:url(../assets/ruler.png) repeat-y 0 0;
+  &:after{ display: block;content:'';position: absolute;top: 0;left: 9px;width: 42px;height: 45px;background:url(../assets/top.png) no-repeat 0 0}
+  }
+  &.tape{bottom: -290px;left: 50%; margin-left: -475px; width: 194px; height: 413px;background:url(../assets/tape.png) no-repeat 0 0} 
+}
 a{
   display: block;
   text-decoration: none;
