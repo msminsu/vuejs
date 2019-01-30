@@ -114,7 +114,7 @@ this.isNext = true;
 		margin:auto;left: 0;top: 0;right: 0;bottom: 0;
 		width: $width;height: $height; background: $bg;border-radius: $round;
 	}
-	&:before{transform: rotate(45deg)}
+	&:before{transform: rotate(45deg)} 
 	&:after{transform: rotate(-45deg)}
 	&:hover{transform: rotate(-90deg);}
 }
