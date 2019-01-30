@@ -1,27 +1,34 @@
 <template>
 <!-- isACtive && 'active' -->
-    <div :class="['detail']" :mode="mode" :style="{ 'background': randomColor}">
-      <button ref="kkk" @click="close">x</button>
+    <div :class="['detail']" :style="{ 'background': this.listData.color}">
+      <button class="btn-close" ref="kkk" @click="close">x</button>
+      <button :class="['btn-prev', isPrev && 'active']" @click="prev">prev</button>
+      <button :class="['btn-next', isNext && 'active']" @click="next">next</button>
       <h3 ref="aaa">{{listData.title}}</h3>
       <!-- <img :src="require(`listData.src`)" alt=""> -->
       <img :src="require('@/assets/' + listData.src + '.jpg')" alt="">
-
-
       <div class="wrap">
         <dl>
         <dt>RELEASE DATE</dt>
-        <dd>2017.06</dd>
+        <dd>{{ listData.id }}/{{maxList}}</dd>
         </dl>
         <dl>
-        <dt>TYPE</dt>
-        <dd>반응형웹</dd>
+        <dt>WORK RATE</dt>
+        <dd>{{listData.works}}</dd>
         </dl>
         <dl>
-        <dt>CLIENT</dt>
-        <dd>TOURCONCERT</dd>
+        <dt>SKILL</dt>
+        <dd>{{listData.skills}}</dd>
         </dl>
       </div>
-      <a  href="">사이트 바로가기</a>
+      <template  v-if="listData.href != null">
+       <a :href="listData.href" target="_blank">사이트 바로가기</a>
+      </template>
+      <template v-else  >
+        <a href="#;">리뉴얼 되었습니다.</a>
+      </template>
+
+
     </div>
 
 </template>
@@ -33,16 +40,22 @@ export default {
     return {
       isActive: false,
       randomColor: '#fff',
-      src:this.listData.src
+      src:this.listData.src,
+      isPrev : false,
+      isNext : false,
     }
   },
 
-  props : ['mode','listData'],
+  props : ['mode','listData','maxList'],
 
   mounted() {
-    this.isActive = true;
+   // this.isActive = true;
     // console.log(this.$refs);
     this.randomColor = this.listData.color//this.getRandomColor();//'#3a3c68'//
+
+    if(this.listData.id  > 1) {this.isPrev = true;}
+    if(this.listData.id < this.maxList){ this.isNext= true;}
+
    },
 
    watch:{
@@ -52,7 +65,28 @@ export default {
    methods: {
     close: function(){
       this.isActive = false;
-     this.$emit('modeChange', 'list')
+      this.$emit('modeChange', 'list')
+    },
+    prev: function(){
+      var current = this.listData.id-1;
+this.isNext = true;
+      if( current <= 1){
+        this.isPrev = false;
+        } else{
+        this.isPrev = true;
+      }
+        this.$emit('dataChange', current)
+
+    },
+    next: function(){
+      var current = this.listData.id+1;
+      this.isPrev = true;
+      if( current >= this.maxList){
+        this.isNext = false;
+        } else{
+        this.isNext = true;
+      }
+      this.$emit('dataChange', current)
     },
     getRandomColor: function () {
         var letters = '0123456789ABCDEF';
@@ -92,14 +126,16 @@ export default {
   top: 0;
   bottom: 0;
   height:100%;
-
+  min-width: 860px;
   box-sizing: border-box;
   padding: 85px;
   text-align: center;
   background: gray;
   transition: all 1000ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
   color: #fff;
-  h3{display: block;font-size: 30px;margin: 50px;}
+  h3{display: block;font-size: 30px;margin: 50px;
+  text-shadow: 3px 3px 5px rgba(3,12,17,0.35);
+  }
 }
 
 .detail.active{
@@ -109,7 +145,7 @@ export default {
 }
 
 img{width: 600px;box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5); }
-button{
+.btn-close{
   border:none;
   outline:none;
   font-size: 24px;
@@ -125,7 +161,57 @@ button{
   top: 30px;
   @include closeAni($width:50px,$height:2px,$bg:#fff);
 }
+.btn-prev{
+  display: block;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  margin-top: -50px;
+  left: 50px;
+  outline:none;
+  border:none;
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-color: gray;
+  background: none;
+  text-indent: -999em;
+  transform: rotate(-45deg);
+  opacity: .5;
 
+  &.active{
+    opacity: 1;
+    border-color: #fff;
+    cursor: pointer;
+  }
+
+}
+.btn-next{
+  display: block;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  margin-top: -50px;
+  right: 50px;
+  outline:none;
+  border:none;
+
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  border-color: gray;
+  background: none;
+  text-indent: -999em;
+  transform: rotate(45deg);
+  opacity: .5;
+
+  &.active{
+    opacity:1;
+    border-color: #fff;
+    cursor: pointer;
+  }
+
+}
 dl{
   font-size: 14px;
   float: left;

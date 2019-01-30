@@ -1,11 +1,11 @@
 <template>
   <div :mode="mode">
     <ul class="listComponent">
-      <li v-for="item in lists" :key="item.id">
+      <li ref="list" v-for="item in lists" :key="item.id">
         <a href="#;" v-on:click="open(item.id)">
             <span class="wrap">
-              <em class="entry_date">Jan 2019</em>
-              <strong>Happy New Year!</strong>
+              <em class="entry_date">{{item.date}}</em>
+              <strong>{{item.title}}</strong>
               <span class="con">{{item.content}}</span>
             </span>
         </a>
@@ -24,6 +24,9 @@ export default {
   },
   listData:{},
   props : ['mode','lists'],
+   mounted() {
+
+   },
   methods: {
     open: function(id){
        this.$emit('modeChange', 'detail',this.lists[id-1]);
@@ -52,6 +55,8 @@ strong{
   font-weight: normal;
 }
 li{
+  overflow: hidden;
+  list-style: none;
   position: relative;
   border-bottom: 1px solid #ddd;
   .wrap{
@@ -65,7 +70,7 @@ li{
     width: 480px;
     display: block;
     text-align-last: left;
-    font-size: 14px;
+    font-size: 12px;
   }
   em{
     font-style: normal;
