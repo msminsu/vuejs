@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <Gate></Gate>
-    <ListComponent v-on:modeChange='onModeChange' v-if="mode ==='list'" :mode="mode"  :lists = 'lists'></ListComponent>
+    <ListComponent v-on:modeChange='onModeChange' v-show="mode ==='list'" :mode="mode"  :lists = 'lists'></ListComponent>
     <transition name="slide-up" >
       <Detail v-if="isSlide" @dataChange="onDataChange" @modeChange='onModeChange' :mode="mode" :listData = 'listData' :maxList = 'maxList'></Detail>
     </transition>
+    <Gate v-if="mode ==='gate'"></Gate>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
   name: 'App',
   data: function(){
     return {
-      mode: 'list',
+      mode: 'gate',
       listData:null,
       isSlide : false,
       maxList : null,
@@ -226,10 +226,19 @@ export default {
   },
     mounted() {
       this.maxList = this.lists.length;
+      var that = this;
        var mainIntro = new TimelineMax();
             mainIntro
-                .staggerFromTo($('li') , 0.7, {y:500, alpha:0}, {y:0, alpha:1, ease:Power2.easeOut}, 0.2, "-=0.25")
+                .from($(".obj"), 1, {y:100,opacity:0, ease:Power2.easeOut})
+                .from($(".message"), 1, {y:5,opacity:0, ease:Power2.easeOut}, "-=0.1")
+                .to($(".gate"), 2, {opacity:0, ease:Power2.easeOut, onComplete:function(){
+                  that.completeGate()
+                }})
+
+
+
     },
+
   methods: {
 
     onModeChange: function(data,list){
@@ -243,6 +252,17 @@ export default {
       if( 0<id && id <= max  ){
        this.listData = this.lists[id-1]
       }
+    },
+    completeGate : function(){
+      this.mode = 'list';
+        var mainIntro2 = new TimelineMax();
+            mainIntro2
+                .from($(".tape"), 1, {top:0,  ease:Power2.easeOut})
+                .from($(".ruler"), 1, {height:0, display:'none', ease:Power2.easeOut}, "-=1")
+                .staggerFromTo($('li') , 0.7, {y:500, alpha:0}, {y:0, alpha:1, ease:Power2.easeOut, onComplete:function(){
+                  $('i').css({transition : 'all 1s'});
+                }}, 0.2, "-=0.7");
+
     }
 
   }
@@ -259,7 +279,6 @@ body{font-family: 'Noto Sans KR' !important;word-break:keep-all;}
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 body{background: #f4f4f4;
 font: 42px/1.4 'Noto Sans KR',  "Times New Roman", Times, serif;

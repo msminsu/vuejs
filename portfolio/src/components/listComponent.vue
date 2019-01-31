@@ -1,5 +1,5 @@
 <template>
-  <div :mode="mode">
+  <div class="listBox" :mode="mode">
     <ul class="listComponent">
       <li ref="list" v-for="item in lists" :key="item.id">
         <a href="#;" v-on:click="open(item.id)">
@@ -11,8 +11,8 @@
         </a>
       </li>
     </ul>
-    <i class="ruler"></i>
-    <i class="tape"></i>
+    <i ref="ruler" class="ruler" :style="{ 'height': this.rHeight}"></i>
+    <i ref="tape" class="tape" :style="{ 'top': this.tapePos}"></i>
   </div>
 </template>
 
@@ -21,30 +21,63 @@ export default {
   name: 'listComponent',
   data () {
     return {
-
+        rHeight: null,
+        tapePos:null
     }
   },
   listData:{},
   props : ['mode','lists'],
    mounted() {
+      this.rHeight = window.innerHeight +'px';
+      this.tapePos = window.innerHeight - 170 +'px';
 
    },
+     created () {
+      window.addEventListener('scroll', this.handleScroll);
+      window.addEventListener('resize', this.onResize);
+      // this.rHeight = window.innerHeight +'px';
+      // this.tapePos = window.innerHeight - 170 +'px';
+  },
   methods: {
+     onResize: function () {
+     this.rHeight = window.innerHeight +'px';
+      this.tapePos = window.innerHeight - 170 +'px';
+    },
     open: function(id){
        this.$emit('modeChange', 'detail',this.lists[id-1]);
-    }
+        this.rHeight = window.innerHeight +'px';
+      this.tapePos = window.innerHeight - 170 +'px';
+    },
+    handleScroll (e) {
+
+         this.rHeight = window.innerHeight + window.scrollY -100 +'px';
+        this.tapePos = window.innerHeight+ window.scrollY - 170 +'px'; //170
+        // this.$refs.ruler
+        // console.log(window.pageYOffset, window.innerHeight);
+            // if ( nowPos  >= startPoint){
+            //     $direct.stop().animate({top:nowPos+50},700)
+            // }else{
+            //     $direct.stop().animate({top:800},700)
+            // }
+      }
   }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped >
+.listBox{
+  overflow: hidden;
+  padding-top: 60px;
+  position: relative;
+  min-width: 960px;
+}
 i{
   position: absolute;
   display: block;
-  &.ruler{top: 0;left: 50%; margin-left: -396px; width: 54px; height: 100vh;background:url(../assets/ruler.png) repeat-y 0 0;
+  &.ruler{top: 0px;left: 50%;  margin-left: -395px; width: 54px; height: 100vh;background:url(../assets/ruler.png) repeat-y 0 0;opacity:1;
   &:after{ display: block;content:'';position: absolute;top: 0;left: 9px;width: 42px;height: 45px;background:url(../assets/top.png) no-repeat 0 0}
   }
-  &.tape{bottom: -290px;left: 50%; margin-left: -475px; width: 194px; height: 413px;background:url(../assets/tape.png) no-repeat 0 0} 
+  &.tape{left: 50%; top:85vh; margin-left: -475px; width: 194px; height: 413px;background:url(../assets/tape.png) no-repeat 0 0}
 }
 a{
   display: block;
@@ -63,6 +96,7 @@ strong{
   text-align: left;
   font-weight: normal;
 }
+ul{padding-bottom: 140px;}
 li{
   overflow: hidden;
   list-style: none;

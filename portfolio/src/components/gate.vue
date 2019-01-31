@@ -1,8 +1,9 @@
 <template>
 <!-- isACtive && 'active' -->
     <div class="gate">
-      <p>
-        Welcome...
+      <i class="obj"></i>
+      <p class="message">
+        THANKS FOR VISITING!
       </p>
     </div>
 
@@ -42,7 +43,7 @@ export default {
 
 .gate{
   overflow: hidden;
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   top: 0;
@@ -52,8 +53,28 @@ export default {
   box-sizing: border-box;
   padding: 85px;
   text-align: center;
-  background: #fff;
   color: #000;
 
+}
+.obj{
+  position: absolute;
+  width: 313px;
+  height: 316px;
+  top: 50%;
+  left: 50%;
+  margin-top: -116px;
+  margin-left: -123px;
+  background: url('../assets/gate.png') no-repeat 50% 50%;
+}
+p{
+  position: absolute;
+  text-indent: -9999em;
+  top: 50%;
+  left: 50%;
+  margin-top: 200px;
+  margin-left: -90px;
+  width: 254px;
+  height: 16px;
+  background: url('../assets/message.png') no-repeat 0 0 ;
 }
 </style>

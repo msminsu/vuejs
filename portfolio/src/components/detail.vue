@@ -7,26 +7,28 @@
       <h3 ref="aaa">{{listData.title}}</h3>
       <!-- <img :src="require(`listData.src`)" alt=""> -->
       <img :src="require('@/assets/' + listData.src + '.png')" alt="">
+      <div class="page">{{ listData.id }}<span> / {{maxList}}</span></div>
       <div class="wrap">
         <dl>
-        <dt>RELEASE DATE</dt>
-        <dd>{{ listData.id }}/{{maxList}}</dd>
-        </dl>
-        <dl>
-        <dt>WORK RATE</dt>
-        <dd>{{listData.works}}</dd>
+        <dt>DESCRIPTION</dt>
+        <dd>{{listData.content}}</dd>
         </dl>
         <dl>
         <dt>SKILL</dt>
         <dd>{{listData.skills}}</dd>
         </dl>
+        <dl>
+        <dt>WORK RATE</dt>
+        <dd>{{listData.works}}</dd>
+        </dl>
+        <template  v-if="listData.href != null">
+        <a class='launch' :href="listData.href" target="_blank">LAUNCH PROJECT</a>
+        </template>
+        <template v-else  >
+          <a class="closed" href="#;">PROJECT RENEWED</a>
+        </template>
       </div>
-      <template  v-if="listData.href != null">
-       <a :href="listData.href" target="_blank">사이트 바로가기</a>
-      </template>
-      <template v-else  >
-        <a href="#;">리뉴얼 되었습니다.</a>
-      </template>
+
 
 
     </div>
@@ -114,7 +116,7 @@ this.isNext = true;
 		margin:auto;left: 0;top: 0;right: 0;bottom: 0;
 		width: $width;height: $height; background: $bg;border-radius: $round;
 	}
-	&:before{transform: rotate(45deg)} 
+	&:before{transform: rotate(45deg)}
 	&:after{transform: rotate(-45deg)}
 	&:hover{transform: rotate(-90deg);}
 }
@@ -212,14 +214,30 @@ this.isNext = true;
   }
 
 }
+.wrap{position: relative;     width: 720px; margin: 0 auto;}
 dl{
   font-size: 14px;
-  float: left;
   margin-right: 30px;
   text-align-last: left;
   dt{font-weight: bold;}
-  dd{}
+  dd{margin-bottom: 10px;}
+}
+.page{font-size: 14px;
+ span{ color: #000}
+}
+a{
+  position: absolute;
+  right:0;
+  top: 0;
+  display: inline-block;padding:3px 10px;
+  text-decoration: none; color: #fff; font-size: 11px;
+  border:1px solid #fff; border-radius: 5px;
+  &:hover{color:#404040; background: #fff;}
+  &.closed{
+    color:#998;
+     border-color: #404040;cursor:default; background: #404040;
+    opacity: .5
+    }
 }
 
-a{text-decoration: none; color: #fff; font-size: 11px;}
 </style>
