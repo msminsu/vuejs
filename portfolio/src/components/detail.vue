@@ -9,6 +9,12 @@
       <img :src="require('@/assets/' + listData.src + '.png')" alt="">
       <div class="page">{{ listData.id }}<span> / {{maxList}}</span></div>
       <div class="wrap">
+        <template  v-if="listData.href != null">
+        <a class='launch' :href="listData.href" target="_blank">LAUNCH PROJECT</a>
+        </template>
+        <template v-else  >
+          <a class="closed" href="#;">PROJECT RENEWED</a>
+        </template>
         <dl>
         <dt>DESCRIPTION</dt>
         <dd>{{listData.content}}</dd>
@@ -21,12 +27,7 @@
         <dt>WORK RATE</dt>
         <dd>{{listData.works}}</dd>
         </dl>
-        <template  v-if="listData.href != null">
-        <a class='launch' :href="listData.href" target="_blank">LAUNCH PROJECT</a>
-        </template>
-        <template v-else  >
-          <a class="closed" href="#;">PROJECT RENEWED</a>
-        </template>
+
       </div>
 
 
@@ -128,7 +129,7 @@ this.isNext = true;
   top: 0;
   bottom: 0;
   height:100%;
-  min-width: 860px;
+  min-width: 1080px;
   box-sizing: border-box;
   padding: 85px;
   text-align: center;
@@ -166,8 +167,8 @@ this.isNext = true;
 .btn-prev{
   display: block;
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   top: 50%;
   margin-top: -50px;
   left: 50px;
@@ -191,8 +192,8 @@ this.isNext = true;
 .btn-next{
   display: block;
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   top: 50%;
   margin-top: -50px;
   right: 50px;
@@ -214,7 +215,7 @@ this.isNext = true;
   }
 
 }
-.wrap{position: relative;     width: 720px; margin: 0 auto;}
+.wrap{position: relative;     width: 890px; margin: 0 auto;}
 dl{
   font-size: 14px;
   margin-right: 30px;
@@ -240,4 +241,22 @@ a{
     }
 }
 
+
+
+@media (max-width: 1080px) and (max-height: 850px) {
+  .detail{width: 100%;min-width: auto;padding: 30px;
+  h3{font-size: 24px;margin: 20px;}
+  }
+
+  .wrap{width: 100%; font-size: 12px;
+  dl{font-size: 12px;text-align: left;}
+  }
+  .page{margin-bottom: 30px;}
+  img{width: 100%;}
+  .btn-close{top: 10px;right: 10px;}
+  .btn-prev,.btn-next{width: 20px;height: 20px;margin-top: -10px;}
+  .btn-prev{left: 10px;}
+  .btn-next{right: 10px;}
+ a{position: relative;margin-bottom: 30px;}
+}
 </style>

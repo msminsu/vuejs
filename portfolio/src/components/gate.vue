@@ -44,17 +44,13 @@ export default {
 .gate{
   overflow: hidden;
   position: absolute;
+  top: 0;
   left: 0;
   right: 0;
-  top: 0;
   bottom: 0;
-  height:100%;
-  min-width: 860px;
   box-sizing: border-box;
-  padding: 85px;
   text-align: center;
   color: #000;
-
 }
 .obj{
   position: absolute;
@@ -63,8 +59,9 @@ export default {
   top: 50%;
   left: 50%;
   margin-top: -116px;
-  margin-left: -123px;
+  margin-left: -153px;
   background: url('../assets/gate.png') no-repeat 50% 50%;
+  // background: url('../assets/gate.png') no-repeat 50% 50%;
 }
 p{
   position: absolute;
@@ -72,9 +69,15 @@ p{
   top: 50%;
   left: 50%;
   margin-top: 200px;
-  margin-left: -90px;
+  margin-left: -130px;
   width: 254px;
   height: 16px;
   background: url('../assets/message.png') no-repeat 0 0 ;
+}
+
+
+@media (max-width: 1080px) and (max-height: 850px) {
+ .obj{width: 156px;height: 158px;background-size:100%; margin-top: -78px; margin-left:-76px;}
+ p{width: 127px; height: 8px; margin-top: 80px; margin-left: -65px; background-size: 100%;}
 }
 </style>

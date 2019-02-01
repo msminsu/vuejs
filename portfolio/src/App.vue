@@ -231,14 +231,14 @@ export default {
             mainIntro
                 .from($(".obj"), 1, {y:100,opacity:0, ease:Power2.easeOut})
                 .from($(".message"), 1, {y:5,opacity:0, ease:Power2.easeOut}, "-=0.1")
-                .to($(".gate"), 2, {opacity:0, ease:Power2.easeOut, onComplete:function(){
-                  that.completeGate()
+               .to($(".gate"), 2, {opacity:0, ease:Power2.easeOut, onComplete:function(){
+                 that.completeGate()
                 }})
 
-
-
     },
+beforeUpdate(){
 
+},
   methods: {
 
     onModeChange: function(data,list){
@@ -255,7 +255,7 @@ export default {
     },
     completeGate : function(){
       this.mode = 'list';
-        var mainIntro2 = new TimelineMax();
+      var mainIntro2 = new TimelineMax();
             mainIntro2
                 .from($(".tape"), 1, {top:0,  ease:Power2.easeOut})
                 .from($(".ruler"), 1, {height:0, display:'none', ease:Power2.easeOut}, "-=1")

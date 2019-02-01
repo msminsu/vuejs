@@ -27,6 +27,7 @@ export default {
   },
   listData:{},
   props : ['mode','lists'],
+
    mounted() {
       this.rHeight = window.innerHeight +'px';
       this.tapePos = window.innerHeight - 170 +'px';
@@ -65,6 +66,8 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped >
+
+
 .listBox{
   overflow: hidden;
   padding-top: 60px;
@@ -74,10 +77,10 @@ export default {
 i{
   position: absolute;
   display: block;
-  &.ruler{top: 0px;left: 50%;  margin-left: -395px; width: 54px; height: 100vh;background:url(../assets/ruler.png) repeat-y 0 0;opacity:1;
-  &:after{ display: block;content:'';position: absolute;top: 0;left: 9px;width: 42px;height: 45px;background:url(../assets/top.png) no-repeat 0 0}
+  &.ruler{top: 0px;left: 50%;  margin-left: -395px; width: 54px; height: 100vh;background:url(../assets/ruler.png) repeat-y 0 0;opacity:1;background-size: 100%;
+  &:after{ display: block;content:'';position: absolute;top: 0;left: 9px;width: 42px;height: 45px;background:url(../assets/top.png) no-repeat 0 0;background-size: 100%;}
   }
-  &.tape{left: 50%; top:85vh; margin-left: -475px; width: 194px; height: 413px;background:url(../assets/tape.png) no-repeat 0 0}
+  &.tape{left: 50%; top:85vh; margin-left: -475px; width: 194px; height: 413px;background:url(../assets/tape.png) no-repeat 0 0;background-size: 100%;}
 }
 a{
   display: block;
@@ -123,6 +126,24 @@ li{
     font-size: 14px;
   }
 
+}
+
+@media (max-width: 1080px) and (max-height: 850px) {
+  .listBox{width: 100%;min-width: auto;}
+  li{
+    strong{width: 100%;    font-size: 20px; padding: 0; padding-left: 100px;}
+    em{top: 7px;}
+    .con{
+      display: none;
+    }
+  }
+  i{
+
+    &.ruler{left: 64px;width: 27px; margin-left: 0; padding-bottom: 80px;
+        &:after{left: 4px;width: 21px;}
+      }
+    &.tape{ left: 24px; width: 97px;margin-left: 0; margin-top: 100px;}
+    }
 }
 
 </style>
