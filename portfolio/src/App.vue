@@ -271,7 +271,7 @@ beforeUpdate(){
 </script>
 
 <style lang="scss"  >
-@import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
+// @import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
 body{font-family: 'Noto Sans KR' !important;word-break:keep-all;}
 #app{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
