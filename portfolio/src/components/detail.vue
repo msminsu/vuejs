@@ -113,6 +113,7 @@ this.isNext = true;
 <style lang="scss" scoped>
 @mixin closeAni($width:false, $height:false,$bg:false,$round:false){
 	transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 50%;
 	&:before,&:after{display: block; position: absolute; content:'';
 		margin:auto;left: 0;top: 0;right: 0;bottom: 0;
 		width: $width;height: $height; background: $bg;border-radius: $round;
